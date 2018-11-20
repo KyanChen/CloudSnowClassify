@@ -15,8 +15,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        main.cpp \
-    readimg.cpp
+    main.cpp \
+    svm.cpp \
+    traindata.cpp \
+    getfeatures.cpp \
+    readData.cpp \
+    testdata.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -25,30 +29,19 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 
 HEADERS += \
-    readimg.h \
-    config.h
+    config.h \
+    svm.h \
+    traindata.h \
+    getfeatures.h \
+    readData.h \
+    testdata.h
 
 macx: LIBS += -L$$PWD/../../../../../../../usr/local/Cellar/gdal/2.3.1_2/lib/ -lgdal.20
 
 INCLUDEPATH += $$PWD/../../../../../../../usr/local/Cellar/gdal/2.3.1_2/include
 DEPENDPATH += $$PWD/../../../../../../../usr/local/Cellar/gdal/2.3.1_2/include
 
-macx: LIBS += -L$$PWD/../../../../../../../usr/local/Cellar/opencv/3.4.3/lib/ -lopencv_calib3d.3.4.3
 
-INCLUDEPATH += $$PWD/../../../../../../../usr/local/Cellar/opencv/3.4.3/include
-DEPENDPATH += $$PWD/../../../../../../../usr/local/Cellar/opencv/3.4.3/include
-
-macx: LIBS += -L$$PWD/../../../../../../../usr/local/Cellar/opencv/3.4.3/lib/ -lopencv_core.3.4.3
-
-INCLUDEPATH += $$PWD/../../../../../../../usr/local/Cellar/opencv/3.4.3/include
-DEPENDPATH += $$PWD/../../../../../../../usr/local/Cellar/opencv/3.4.3/include
-
-macx: LIBS += -L$$PWD/../../../../../../../usr/local/Cellar/opencv/3.4.3/lib/ -lopencv_highgui.3.4.3
-
-INCLUDEPATH += $$PWD/../../../../../../../usr/local/Cellar/opencv/3.4.3/include
-DEPENDPATH += $$PWD/../../../../../../../usr/local/Cellar/opencv/3.4.3/include
-
-macx: LIBS += -L$$PWD/../../../../../../../usr/local/Cellar/opencv/3.4.3/lib/ -lopencv_imgproc.3.4.3
-
-INCLUDEPATH += $$PWD/../../../../../../../usr/local/Cellar/opencv/3.4.3/include
-DEPENDPATH += $$PWD/../../../../../../../usr/local/Cellar/opencv/3.4.3/include
+QT_CONFIG -= no-pkg-config
+CONFIG += link_pkgconfig
+PKGCONFIG += opencv
